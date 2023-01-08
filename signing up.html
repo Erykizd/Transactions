@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='open-sans.css' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="signing up.css">
+</head>
+
+<body>
+	<header class="flexBoxRow">
+		<button id="logInBtn" class = "headerBtn">Logowanie</button>
+		<h2>Rejestracja</h2>
+		<label for="darkModeCheckBox">
+			<p class = "darkModeP"></p>
+		</label>
+		<input type="checkbox" hidden class="darkMode" id="darkModeCheckBox">
+	</header>
+
+	<div class="container">
+	  <form action="./logged%20in.html" method="post">
+	  
+		<div class="flexBoxCol">
+		
+		  <h1>Zarejestruj się</h1>
+		  <p>Wypełnij formę, aby utworzyć nowe konto.</p>
+		
+		  <div class="flexBoxCol">
+			<label for="emailIn"><b>E-mail</b></label>
+			<input type="email" placeholder="Wprowadź Email" name="email" id="emailIn" required>
+		  </div>
+		
+		  <div class="flexBoxCol">
+			<label for="emailRepeatIn"><b>Powtórz email</b></label>
+			<input type="email" placeholder="Powtórz email" name="email-repeat" id="emailRepeatIn" required>
+		  </div>
+
+		  <div class="flexBoxCol">
+			<label for="userNameIn"><b>Nazwa użytkownika</b></label>
+			<input type="text" placeholder="Wprowadź nazwę użytkownika" name="userName" id="userNameIn" required minlength=6 maxlength=16>
+		  </div>
+
+		  <div class="flexBoxCol">
+			<label for="passwordIn"><b>Hasło</b></label>
+			<input type="password" placeholder="Wprowadź hasło" name="password" id="passwordIn" required maxlength=30 minlength=6>
+		  </div>
+		  
+		  <div class="flexBoxCol">
+			<label for="passwordRepeatIn"><b>Powtórz hasło</b></label>
+			<input type="password" placeholder="Powtórz haslo" name="password-repeat" name="passwordRepeatIn" required required maxlength=30 minlength=6>
+		  </div>
+		
+		  <div class="flexBoxRow">
+			<label>
+				<input type="checkbox" id = "rememberMe" name="remember" checked="checked"> Zapamiętaj mnie
+			</label>
+				  
+			<label>
+				<input type="checkbox" id="showPassword"> Pokaz hasło
+			</label>
+		  </div>
+		
+		  <div class="flexBoxCol">
+		  <div id="info">Siła hasła = 0</div>
+			<progress name = "progBar" value = "0" max = "1"></progress>
+		  </div>
+		 
+		  <div class="flexBoxRow">
+			<p>Tworząc konto zgadzasz się na nasz <a href="#">Regulamin</a>.</p>
+		  </div>
+		
+		  <div class="flexBoxRow">
+	  	   <button id="resetBtn" type="reset" class="formBtn">Wyczyść formę</button>
+		   <button type="submit" id="signupbtn" class="formBtn">Zarejestruj się</button>
+		  </div>
+		</div>
+	  </form>
+  </div>
+
+<script type="text/javascript" src="signing up.js"></script>
+</body>
+</html>

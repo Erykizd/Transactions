@@ -1,0 +1,10 @@
+:root 
+{
+  --progColor: blue;
+}
+
+ progress
+ {
+	 accent-color: var(--progColor);
+ }
+ 

@@ -1,0 +1,13 @@
+/* Center the image */
+.imageContainer 
+{
+  text-align: center;
+  margin: 1%;
+  position: relative;
+}
+
+img.avatar 
+{ 
+  width: 15%;
+  border-radius: 50%;
+}

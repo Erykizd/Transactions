@@ -1,0 +1,153 @@
+canvas
+{
+	margin-left: 0.5%;
+	margin-right: 0.5%;
+	width: 49% !important;
+	height: 100% !important;
+	margin-top: 5%;
+	margin-bottom: 5%;
+	padding-bottom: 40px;
+	background-color: var(--statistics-bg-color);
+	border-radius: 15px;
+}
+
+#charts
+{
+	margin-right: 0px;
+	margin-left: 2%;
+	width: 94%;
+	background-color: var(--statistics-bg-color);
+	border-radius: 15px;
+}
+
+#transCont
+{
+	height: 10%;
+	overflow: scroll;
+}
+
+table, tr, th, td, caption 
+{
+  background-color: var(--statistics-bg-color); 
+  color: black;
+  border:1px solid black;
+}
+
+td
+{
+	height: 20px;
+	text-align: center;
+}
+
+td.type
+{
+	font-size: 38px; /* size of emoticons for types of transactions*/
+}
+
+Caption /*title of table*/
+{
+	font-weight: bold;
+	font-size: 22px;
+}
+
+table a
+{
+	color: black;
+	text-decoration: none;
+	padding: 10px;
+}  
+
+tr:hover 
+{
+	filter: brightness(85%);
+}
+
+#loggedInfo
+{
+	height: 80px;
+	text-align: center; 
+}
+
+#logOutBtn
+{
+	height: 80px;
+}
+
+
+/* Center the image */
+.imageContainer 
+{
+  height: 80px;
+  text-align: center;
+  margin: 1%;
+  position: relative;
+}
+
+img
+{
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+}
+
+
+/*For mobile view*/
+@media (max-width: 768px)
+{
+	canvas
+	{
+	width: 101% !important; 
+	height: 100% !important;
+	}
+  
+	#charts
+	{
+	  overflow: scroll !important;
+	}
+  
+	/* Choosing row - changing it's style*/
+	.closeRow>a
+	{
+		color: red;
+		font-weight: bold;
+	}
+	
+	.date,.balance,.afterDescription
+	{
+	  display: none;
+	}
+  
+  
+	tr:target>td.date,
+	table:has(tr:target) .date,
+	tr:target>td.balance,
+	table:has(tr:target) th.balance,
+	tr:target .afterDescription,
+	tr:target .closeRow
+	{
+		display: table-cell;
+	}
+	
+	tr:not(:target) td.date>a,
+	th td.date>a
+	{
+		display: none;
+	}
+	
+	tr:not(:target) td.date
+	{
+		border: none;
+	}
+	
+	tr:target,
+	table:has(tr:target) tr:has(th),
+	table:has(tr:target) caption
+	{
+		transform: scaleY(1.2);
+	}
+	
+	tr:target
+	{
+		 box-shadow: 5px 10px 8px #888888;
+	}
+}

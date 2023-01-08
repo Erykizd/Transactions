@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='open-sans.css' rel='stylesheet' type='text/css'>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="logging in.css">
+</head>
+
+<body>
+  <header class="flexBoxRow">
+		<button id = "signUpBtn" class = "headerBtn">Rejestracja</button>
+		<h2>Logowanie</h2>
+		<label for="darkModeCheckBox">
+			<p class = "darkModeP"></p>
+		</label>
+		<input type="checkbox" hidden class="darkMode" id="darkModeCheckBox">
+  </header>
+
+  <div class="container">
+	  <form action="./logged%20in.html" method="post">
+		
+		<div class="flexBoxCol">
+		
+			<h1>Zaloguj się</h1>
+			<div class="imageContainer">
+			  <img src="avatar.jfif" alt="Avatar" class="avatar">
+			</div>
+
+				<div class="flexBoxCol">
+				  <label for="userNameIn"><b>Nazwa użytkownika lub E-mail</b></label>
+				  <input type="text" placeholder="Wprowadź nazwę użytkownika" name="userName" id="userNameIn" required minlength=6 maxlength=16>
+				 </div>
+
+				 <div class="flexBoxCol">
+				  <label for="passwordIn"><b>Hasło</b></label>
+				  <input type="password" placeholder="Wprowadź hasło" id="passwordIn" name="password" required minlength=6 maxlength=30>
+				 </div>
+				  
+				 <div class="flexBoxRow">
+				  <label>
+					<input type="checkbox" checked="checked" name="remember" id="rememberMe"> Zapamiętaj mnie
+				  </label>
+				  
+				  <label>
+					<input type="checkbox" id="showPassword"> Pokaz hasło
+				  </label>
+				 </div>
+				  
+				 <div class="flexBoxCol">
+				  <div class="password">Zapomniałeś/łaś <a href="#">hasła?</a></div>
+				 </div>
+				  
+				  <div class="flexBoxRow" id="btns">
+				  <button id="resetBtn" type="reset" class="formBtn">Wyczyść formę</button>
+				  <button type="submit" id = "submitBtn" class="formBtn">Zaloguj</button>
+				 </div>
+			  
+			</div>
+		</div>	
+	  </form>
+	</div>
+	
+<script type="text/javascript" src="logging in.js"></script>
+</body>
+</html>

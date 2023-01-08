@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='open-sans.css' rel='stylesheet' type='text/css'>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="logged in.css">
+</head>
+
+<body>
+<header id="belt" class="flexBoxRow">
+			<div class="imageContainer">
+			  <img src="avatar.jfif" alt="Avatar" class="avatar">
+			</div>
+		<h2 id = "loggedInfo">Zalogowany/na jako: Jan Kowalski</h2>
+		<button id = "logOutBtn" class = "headerBtn">Wyloguj się</button>
+		<label for="darkModeCheckBox">
+			<p class = "darkModeP"></p>
+		</label>
+		<input type="checkbox" hidden class="darkMode" id="darkModeCheckBox">
+</header>
+
+<div class = "flexBoxCol" id = "transCont">
+	<div class = "flexBoxRow" id = "charts">
+		<canvas id="pie">
+		</canvas>
+		<canvas id="bars">
+		</canvas>
+	</div>
+
+	<div class = "flexBoxCol" id = "transCont">
+		<table id="transactions">
+			<caption>Transakcje</caption>
+			<tr>
+				<th class="date">Data</td>
+				<th class="type">Typ</td>
+				<th class="description">Opis</td>
+				<th class="amount">Kwota</td>
+				<th class="balance">Saldo</td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+<script type="text/javascript" src="logged in.js"></script>
+
+</body>
+</html>
