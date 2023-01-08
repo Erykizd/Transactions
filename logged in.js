@@ -1,7 +1,9 @@
 var pieCanvas = document.getElementsByTagName("canvas")[0];
 var barsCanvas = document.getElementsByTagName("canvas")[1];
 var table = document.getElementsByTagName("table")[0];
-var emoticons = ["🤑", "🛍️", "💰", "💳"];
+var emoticons = ["💰", "🛍️", "🤑", "💳"];
+var pie;
+var bars;
 
 document.getElementById("logOutBtn").addEventListener("click", logOut);
 
@@ -41,7 +43,7 @@ function drawPie(pieData)
 				    'rgb(195, 0, 0)',
 					'lightgreen',
 					'red'
-			]
+			],
 		  }]
 		},
 		options: 
@@ -50,16 +52,39 @@ function drawPie(pieData)
 			{
 				display: true,
 				text: 'Procentowy udział typów transakcji',
-				fontSize: 25
+				fontSize: 22,
+				fontColor: 'black'
+			},
+			legend:
+			{
+				labels:
+					{
+							fontSize: 14,
+							fontColor: 'black'
+					}
 			}
 		}
 	  });
+  	  console.log(pie);
 }
 
 
 function drawBars(barsData)
 {	
-	  var pie = new Chart("bars", 
+	let backgroundColors = [];
+	for(let i = 0; i < barsData.balance.length; i++)
+	{
+		if(barsData.balance[i] > 0)
+		{
+			backgroundColors[i] = 'green';
+		}
+		else
+		{
+			backgroundColors[i] = 'red';	
+		}
+	}
+	
+	  bars = new Chart("bars", 
 	  {
 		type: 'bar',
 		data: 
@@ -67,16 +92,9 @@ function drawBars(barsData)
 		  labels: barsData.dates,
 		  datasets: 
 		  [{
-			label: '# of Votes',
+			label: 'Saldo',
 			data: barsData.balance,
-			backgroundColor: 
-			[
-				    'green',
-				    'green',
-				    'green',
-				    'green',
-				    'green'
-			]
+			backgroundColor: backgroundColors
 		  }]
 		},
 		options: 
@@ -84,11 +102,21 @@ function drawBars(barsData)
 			title: 
 			{
 				display: true,
-				text: 'Procentowy udział typów transakcji',
-				fontSize: 25
+				text: 'Wykres salda konta na koniec dnia',
+				fontSize: 22,
+				fontColor: 'black'
+			},
+			legend:
+			{
+				labels:
+					{
+							fontSize: 14,
+							fontColor: 'black'
+					}
 			}
 		}
 	  });
+	  console.log(bars);
 }
 
 

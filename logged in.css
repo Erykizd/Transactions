@@ -1,12 +1,14 @@
+header
+{
+	height: 9vh;
+}
+
 canvas
 {
 	margin-left: 0.5%;
 	margin-right: 0.5%;
-	width: 49% !important;
-	height: 100% !important;
-	margin-top: 5%;
-	margin-bottom: 5%;
-	padding-bottom: 40px;
+	width: 45% !important;
+	height: 39vh !important;
 	background-color: var(--statistics-bg-color);
 	border-radius: 15px;
 }
@@ -15,15 +17,26 @@ canvas
 {
 	margin-right: 0px;
 	margin-left: 2%;
+	margin-bottom: 0px;
+	margin-top: 0px;
 	width: 94%;
+	height: 39vh;
 	background-color: var(--statistics-bg-color);
 	border-radius: 15px;
 }
 
 #transCont
 {
-	height: 10%;
+	height: 36vh;
 	overflow: scroll;
+	margin-bottom: 0px;
+	margin-top: 2px;
+}
+
+#mainCont
+{
+	margin: 0;
+	padding: 0;
 }
 
 table, tr, th, td, caption 
@@ -50,6 +63,7 @@ Caption /*title of table*/
 	font-size: 22px;
 }
 
+
 table a
 {
 	color: black;
@@ -62,22 +76,10 @@ tr:hover
 	filter: brightness(85%);
 }
 
-#loggedInfo
-{
-	height: 80px;
-	text-align: center; 
-}
-
-#logOutBtn
-{
-	height: 80px;
-}
-
-
 /* Center the image */
 .imageContainer 
 {
-  height: 80px;
+  height: 40px;
   text-align: center;
   margin: 1%;
   position: relative;
@@ -88,6 +90,18 @@ img
 	width: 100%;
 	height: 100%;
 	border-radius: 50%;
+}
+
+#loggedInfo
+{
+	height: 40px;
+	text-align: center; 
+}
+
+#logOutBtn
+{
+	height: 40px; 
+	padding: 1px;
 }
 
 

@@ -54,20 +54,21 @@ function hideShowPasword()
 
 function checkPassword()
 {
-		let psw = document.getElementsByName("password")[0].value;
+		let pswd = document.getElementsByName("password")[0].value;
 		let Lmax = document.getElementsByName("password")[0].maxLength;
-		let nrOfSigns = psw.length;
+		let nrOfSigns = pswd.length;
 		let sign = '.';
 		
 		nrOfSmallLetters = 0;
 		nrOfBigLetters = 0;
 		nrOfDigits = 0;
 		nrOfSpecialSigns = -1;
-		let pswStrength = 0;
+
+		let pswdStrength = 0;
 		
 		for (let i=0; i<=nrOfSigns; i++)
 		{
-			sign = psw.charAt(i);
+			sign = pswd.charAt(i);
 			if ((/[a-z]/).test(sign))
 			{
 				nrOfSmallLetters++;
@@ -92,26 +93,26 @@ function checkPassword()
 				26*Math.sign(nrOfSmallLetters) + 
 				26*Math.sign(nrOfBigLetters) + 
 				(256-62)*Math.sign(nrOfSpecialSigns);
-			pswStrength = nrOfSigns * Math.log(n) / Math.log(2) / (8*Lmax);
+			pswdStrength = nrOfSigns * Math.log(n) / Math.log(2) / (8*Lmax);
 		}
 		else
 		{
-			pswStrength = 0;
+			pswdStrength = 0;
 		}
 				
 		let r = document.querySelector(':root');
 		let rs = getComputedStyle(r);
 		
 		//changing progressbar color depending on password strength
-		if(pswStrength < 0.25)
+		if(pswdStrength < 0.25)
 		{
 					r.style.setProperty("--progColor", "red");
 		}
-		else if(pswStrength < 0.5)
+		else if(pswdStrength < 0.5)
 		{
 					r.style.setProperty("--progColor", "orange");
 		}
-		else if(pswStrength < 0.75)
+		else if(pswdStrength < 0.75)
 		{
 					r.style.setProperty("--progColor", "yellow");
 		}
@@ -120,8 +121,8 @@ function checkPassword()
 					r.style.setProperty("--progColor", "green");
 		}
 		
-		document.getElementById("info").innerHTML = "Siła hasła = " + Math.round(pswStrength*10000)/100 + " %"; 
-		document.getElementsByName("progBar")[0].value = pswStrength; 		
+		document.getElementById("info").innerHTML = "Siła hasła = " + Math.round(pswdStrength*10000)/100 + " %"; 
+		document.getElementsByName("progBar")[0].value = pswdStrength;
 }
 
 
@@ -157,17 +158,66 @@ function validateEmail()
 
 function validateUserName()
 {
-	if(localStorage.getItem(userName.value)!=null) 
+	let nrOfBigLettersInName = 0;
+	let nrOfSmallLettersInName = 0;
+	let nrOfLettersInName = 0;
+	let nrOfDigitsInName = 0;
+	let	nrOfIntiveSignsInName = 0; // - _ [ ] \ /
+	let intiveSigns = "-_[]\/".split("");
+	let nrOfNotAllowedSignsInName = 0;
+	let sign = '.';
+	
+	for (let i = 0; i <= userName.value.length; i++)
+	{
+		sign = userName.value.charAt(i);
+		if ((/[a-z]/).test(sign))
+		{
+			nrOfSmallLettersInName++;
+		}
+		else if ((/[A-Z]/).test(sign))
+		{
+			nrOfBigLettersInName++;
+		}
+		else if ((/[0-9]/).test(sign))
+		{
+			nrOfDigitsInName++;
+		}
+		else if (hasStringCharsSuchAs(sign, intiveSigns))
+		{
+			nrOfIntiveSignsInName++;
+		}
+		else if(sign != "")
+		{
+			nrOfNotAllowedSignsInName++;
+		}
+	}
+	
+	nrOfLettersInName = nrOfBigLettersInName + nrOfSmallLettersInName;
+
+
+	if(localStorage.getItem(userName.value) != null) 
 	{
 		userName.setCustomValidity("Użytkownik o tej nazwie już istnieje");
 	} 
-	else if (userName.value=="")
+	else if (userName.value == "")
 	{
 		userName.setCustomValidity("Wypełnij to pole");
 	}
 	else if(userName.value.length < userName.minLength)
 	{
 		userName.setCustomValidity("Nazwa użytkownika za krótka (zawiera " + userName.value.length + ", a powinna zawierać conajmniej " + userName.minLength + " znaków)");
+	}
+	else if (nrOfNotAllowedSignsInName > 0)
+	{
+		userName.setCustomValidity("Nazwa użytkownika zawiera niedozwolone znaki");
+	}
+	else if (nrOfDigitsInName < 1)
+	{
+		userName.setCustomValidity("Nazwa użytkownika nie zawiera cyfr");
+	}
+	else if (nrOfLettersInName < 5)
+	{
+		userName.setCustomValidity("Nazwa użytkownika zawiera za mało liter (wymagane conajmniej 5 liter)");
 	}
 	else
 	{
@@ -254,4 +304,17 @@ function isJsonString(str)
         return false;
     }
     return true;
+}
+
+
+function hasStringCharsSuchAs(str, chars)
+{
+	for(let i = 0; i < chars.length; i++)
+    {
+    	if(str.includes(chars[i]))
+        {
+        	return true;
+        }
+    }
+    return false;
 }
