@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href='open-sans.css' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="logging in.css">
@@ -15,6 +15,10 @@
 			<p class = "darkModeP"></p>
 		</label>
 		<input type="checkbox" hidden class="darkMode" id="darkModeCheckBox">
+		<label for="langCheckbox" id = "langLabel" class = "lang">
+		English
+		</label>
+		<input type="checkbox" hidden class="lang" id="langCheckbox">
   </header>
 
   <div class="container">
@@ -38,17 +42,15 @@
 				 </div>
 				  
 				 <div class="flexBoxRow">
-				  <label>
-					<input type="checkbox" checked="checked" name="remember" id="rememberMe"> Zapamiętaj mnie
+				  <input type="checkbox" checked="checked" name="remember" id="rememberMe">
+				  <label for = "rememberMe">
+				  Zapamiętaj mnie
 				  </label>
-				  
-				  <label>
-					<input type="checkbox" id="showPassword"> Pokaz hasło
+  				  
+				  <input type="checkbox" id="showPassword">
+				  <label for = "showPassword">
+				  Pokaz hasło
 				  </label>
-				 </div>
-				  
-				 <div class="flexBoxCol">
-				  <div class="password">Zapomniałeś/łaś <a href="#">hasła?</a></div>
 				 </div>
 				  
 				  <div class="flexBoxRow" id="btns">
@@ -61,6 +63,7 @@
 	  </form>
 	</div>
 	
+<script type="text/javascript" src="script.js"></script>
 <script type="text/javascript" src="logging in.js"></script>
 </body>
 </html>

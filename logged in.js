@@ -1,11 +1,12 @@
 var pieCanvas = document.getElementsByTagName("canvas")[0];
 var barsCanvas = document.getElementsByTagName("canvas")[1];
 var table = document.getElementsByTagName("table")[0];
+var logOutBtn = document.getElementById("logOutBtn");
 var emoticons = ["💰", "🛍️", "🤑", "💳"];
 var pie;
 var bars;
 
-document.getElementById("logOutBtn").addEventListener("click", logOut);
+logOutBtn.addEventListener("click", logOut);
 
 var linkStr = "https://api.npoint.io/38edf0c5f3eb9ac768bd";
 var path = "data.json";
@@ -144,13 +145,17 @@ function generatePieData(dataIn)
 			case 4:
 				y[3] += 1;
 				break;	
-		}		
-		sum += 1;
+		}			
 	}
 	
 	for(let i = 0; i < y.length; i++)
 	{
-		y[i] *= Math.round(10000/sum)/100;
+		sum += y[i];
+	}
+	
+	for(let i = 0; i < y.length; i++)
+	{
+		y[i] = Math.round(10000*y[i]/sum)/100;
 		labels[i] = dataIn.transacationTypes[i+1] +" [%]";
 	}
 	
@@ -158,6 +163,7 @@ function generatePieData(dataIn)
 	pie.labels = labels;
 	return pie;
 }
+
 
 function generateBarsData(dataIn)
 {
@@ -199,24 +205,12 @@ function logOut()
 	window.open("logged out.html", "_self");
 }
 
-
-async function getData(inputStr) 
-{
-  let obj = await fetch(inputStr);
-  let str = await obj.text();
-  let obj2 = await JSON.parse(str);
-  
-  return obj2;
-}
-
-
 function setLoggedInSuer()
 {
 	if(localStorage.getItem("loggedUserName") != null)
 	{
 	document.getElementById("loggedInfo").innerHTML = 
-						"Zalogowany/na jako: " + 
-						localStorage.getItem("loggedUserName");
+	localStorage.getItem("loggedUserName");
 	}
 }
 
@@ -250,10 +244,10 @@ function fillTransTable(dataIn)
 		cell.className = "type";
 		
 		cell = row.insertCell();
-		cell.innerHTML = "<div>" + beggining + "" + description 
-						+ ending +"</br> <a class = 'afterDescription' "
+		cell.innerHTML = beggining + "<div>" + description 
+						+ "</div>" + "</br> <div class = 'afterDescription' "
 						+ 'href = "#' + row.id + '">'
-						+ type + "</a></div>";
+						+ type + "</div>" + ending;
 		cell.className = "description";
 		
 		cell = row.insertCell();

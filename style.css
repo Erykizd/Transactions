@@ -1,7 +1,6 @@
 * 
 {
     font-family: 'Open Sans';
-	font-style: normal;
 }
 
 body 
@@ -25,6 +24,17 @@ label
 	text-overflow: ellipsis; 
   	width: 30%;
 	float: left;
+}
+
+#langLabel
+{
+	width: 5%;
+	text-align: center;
+}
+
+#langLabel:hover
+{
+	cursor: pointer;
 }
 
 input[type=text], input[type=password], input[type=email] 
@@ -67,19 +77,23 @@ button
   font-size: 22px;
   font-weight: bold;
   overflow: hidden;
-  text-overflow: ellipsis; 
+  text-overflow: ellipsis;
   transition: 0.5s;
 }
 
 button:hover 
 {
 	scale: 1.02;
+	filter: brightness(120%);
 }
+
 
 button:active 
 {
 	scale: 0.9;
+	filter: brightness(80%);
 }
+
 
 form 
 {
@@ -173,6 +187,11 @@ body:has(#darkModeCheckBox:checked)
 {
 	text-align: center;
 	font-size: 26px;
+}
+
+header>label>.darkModeP:hover
+{
+	cursor: pointer;
 }
 
 header>label>.darkModeP::before

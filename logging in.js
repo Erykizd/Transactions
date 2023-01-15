@@ -12,7 +12,7 @@ document.getElementById("showPassword").addEventListener("click", hideShowPaswor
 form1.addEventListener("keyup", validateUserName);
 form1.addEventListener("keyup", validatePassword);
 form1.addEventListener("submit", saveFields);
-
+document.getElementById("langLabel").addEventListener("mouseout", ()=>{validateUserName(); validatePassword()});
 
 fillFields();
 
@@ -74,6 +74,18 @@ function fillFields()
 
 function validateUserName()
 {
+	let txt1, txt2;
+	if(pl)
+	{
+		txt1 = "Wypełnij to pole";
+		txt2 = "Użytkownik o tej nazwie nie istnieje";
+	}
+	else
+	{
+		txt1 = "Please fill in this field";
+		txt2 = "User with this name does not exist";
+	}
+	
 	if((localStorage.getItem(userName.value)!=null) //if userName exists
 	   || (getUserNameforEmail(userName.value)!=null)) // or if email exists 
 	{
@@ -81,17 +93,30 @@ function validateUserName()
 	}
 	else if (userName.value=="") //if empty userName field
 	{
-		userName.setCustomValidity("Wypełnij to pole");
+		userName.setCustomValidity(txt1);
 	}
 	else // rest of cases
 	{
-		userName.setCustomValidity("Użytkownik o tej nazwie nie istnieje");
+		userName.setCustomValidity(txt2);
 	}
 }
 
 
 function validatePassword()
 {
+	let txt1, txt2;
+	if(pl)
+	{
+		txt1 = "Nieprawidłowe hasło";
+		txt2 = "Wypełnij to pole";
+	}
+	else
+	{
+		txt1 = "Invalid password";
+		txt2 = "Please fill in this field";
+	}
+	
+	
 	if((localStorage.getItem(userName.value) != null)  //if username exists
 		|| (localStorage.getItem(getUserNameforEmail(userName.value)) != "")) //or if email exists
 	{
@@ -107,7 +132,7 @@ function validatePassword()
 		
 		if(userJsObj.psw != psw.value)
 		{
-			psw.setCustomValidity("Nieprawidłowe hasło");
+			psw.setCustomValidity(txt1);
 		}
 		else
 		{
@@ -116,7 +141,7 @@ function validatePassword()
 	} 
 	else if (userName.value=="")
 	{
-		psw.setCustomValidity("Wypełnij to pole");
+		psw.setCustomValidity(txt2);
 	}
 	else
 	{

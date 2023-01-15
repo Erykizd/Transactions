@@ -14,6 +14,8 @@ var nrOfBigLetters = 0;
 var nrOfDigits = 0;
 var nrOfSpecialSigns = -1;
 
+document.getElementById("langLabel").addEventListener("mouseout", ()=>{checkPassword(); 
+									validateEmail(); validateUserName(); validateConfPassword()});
 document.getElementById("logInBtn").addEventListener("click", logIn);
 showPassword.addEventListener("click", hideShowPasword);
 
@@ -121,16 +123,32 @@ function checkPassword()
 					r.style.setProperty("--progColor", "green");
 		}
 		
-		document.getElementById("info").innerHTML = "Siła hasła = " + Math.round(pswdStrength*10000)/100 + " %"; 
+		let strengthText = "";
+		if(pl)
+		{
+			strengthText = "Siła hasła = ";
+		}
+		else
+		{
+			strengthText = "Strength of password = ";
+		}
+		
+		document.getElementById("info").innerHTML = strengthText + Math.round(pswdStrength*10000)/100 + " %"; 
 		document.getElementsByName("progBar")[0].value = pswdStrength;
 }
 
 
 function validateConfPassword()
 {
+	let txt1 = "Hasła nie są zgodne";
+	if(!pl)
+	{
+		txt1 = "Passwords are different";
+	}
+	
 	if(psw.value != confPsw.value) 
 	{
-		confPsw.setCustomValidity("Hasła nie są zgodne");
+		confPsw.setCustomValidity(txt1);
 	} 
 	else 
 	{
@@ -141,13 +159,21 @@ function validateConfPassword()
 
 function validateEmail()
 {
+	let txt1 = "Emaile nie są zgodne";
+	let txt2 = "Email zajęty przez innego użytkownika";
+	if (!pl)
+	{
+		txt1 = "Emails are different";
+		txt2 = "Email used by other user";
+	}	
+	
 	if(email.value != confEmail.value) 
 	{
-		confEmail.setCustomValidity("Emaile nie są zgodne");
+		confEmail.setCustomValidity(txt1);
 	} 
 	else if(isEmailAssigned(email.value))
 	{
-		confEmail.setCustomValidity("Email zajęty przez innego użytkownika");
+		confEmail.setCustomValidity(txt2);
 	}
 	else 
 	{
@@ -194,30 +220,53 @@ function validateUserName()
 	
 	nrOfLettersInName = nrOfBigLettersInName + nrOfSmallLettersInName;
 
-
+	let txt1, txt2, txt3a, txt3b, txt3c, txt4, txt5, txt6;
+	if(pl)
+	{
+		txt1 = "Użytkownik o tej nazwie już istnieje";
+		txt2 = "Wypełnij to pole";
+		txt3a = "Nazwa użytkownika za krótka (zawiera ";
+		txt3b = ", a powinna zawierać conajmniej ";
+		txt3c = " znaków)";
+		txt4 = "Nazwa użytkownika zawiera niedozwolone znaki";
+		txt5 = "Nazwa użytkownika nie zawiera cyfr";
+		txt6 = "Nazwa użytkownika zawiera za mało liter (wymagane conajmniej 5 liter)";
+	}
+	else
+	{
+		txt1 = "A user with this name already exists";
+		txt2 = "Please fill in this field";
+		txt3a = "Username too short (contains ";
+		txt3b = " and should contain at least ";
+		txt3c = " characters)";
+		txt4 = "Username contains illegal characters";
+		txt5 = "Username does not contain numbers";
+		txt6 = "Username contains too few letters (at least 5 letters required)";
+	}
+	
 	if(localStorage.getItem(userName.value) != null) 
 	{
-		userName.setCustomValidity("Użytkownik o tej nazwie już istnieje");
+		userName.setCustomValidity(txt1);
 	} 
 	else if (userName.value == "")
 	{
-		userName.setCustomValidity("Wypełnij to pole");
+		userName.setCustomValidity(txt2);
 	}
 	else if(userName.value.length < userName.minLength)
 	{
-		userName.setCustomValidity("Nazwa użytkownika za krótka (zawiera " + userName.value.length + ", a powinna zawierać conajmniej " + userName.minLength + " znaków)");
+		userName.setCustomValidity(txt3a + userName.value.length + txt3b + userName.minLength + txt3c);
 	}
 	else if (nrOfNotAllowedSignsInName > 0)
 	{
-		userName.setCustomValidity("Nazwa użytkownika zawiera niedozwolone znaki");
+		userName.setCustomValidity(txt4);
 	}
 	else if (nrOfDigitsInName < 1)
 	{
-		userName.setCustomValidity("Nazwa użytkownika nie zawiera cyfr");
+		userName.setCustomValidity(txt5);
 	}
 	else if (nrOfLettersInName < 5)
 	{
-		userName.setCustomValidity("Nazwa użytkownika zawiera za mało liter (wymagane conajmniej 5 liter)");
+		userName.setCustomValidity(txt6);
 	}
 	else
 	{

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href='open-sans.css' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="signing up.css">
 </head>
@@ -14,6 +14,10 @@
 			<p class = "darkModeP"></p>
 		</label>
 		<input type="checkbox" hidden class="darkMode" id="darkModeCheckBox">
+		<label for="langCheckbox" id = "langLabel" class = "lang">
+		English
+		</label>
+		<input type="checkbox" hidden class="lang" id="langCheckbox">
 	</header>
 
 	<div class="container">
@@ -50,24 +54,22 @@
 		  </div>
 		
 		  <div class="flexBoxRow">
-			<label>
-				<input type="checkbox" id = "rememberMe" name="remember" checked="checked"> Zapamiętaj mnie
+			<input type="checkbox" id = "rememberMe" name="remember" checked="checked">
+			<label for = "rememberMe">
+			Zapamiętaj mnie
 			</label>
-				  
-			<label>
-				<input type="checkbox" id="showPassword"> Pokaz hasło
+			
+			<input type="checkbox" id="showPassword">			
+			<label for = "showPassword">
+			Pokaz hasło
 			</label>
 		  </div>
 		
 		  <div class="flexBoxCol">
-		  <div id="info">Siła hasła = 0</div>
+		  <div id="info">Siła hasła = </div>
 			<progress name = "progBar" value = "0" max = "1"></progress>
 		  </div>
 		 
-		  <div class="flexBoxRow">
-			<p>Tworząc konto zgadzasz się na nasz <a href="#">Regulamin</a>.</p>
-		  </div>
-		
 		  <div class="flexBoxRow">
 	  	   <button id="resetBtn" type="reset" class="formBtn">Wyczyść formę</button>
 		   <button type="submit" id="signupbtn" class="formBtn">Zarejestruj się</button>
@@ -76,6 +78,7 @@
 	  </form>
   </div>
 
+<script type="text/javascript" src="script.js"></script>
 <script type="text/javascript" src="signing up.js"></script>
 </body>
 </html>

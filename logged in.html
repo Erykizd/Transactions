@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href='open-sans.css' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="logged in.css">
@@ -12,12 +12,16 @@
 			<div class="imageContainer">
 			  <img src="avatar.jfif" alt="Avatar" class="avatar">
 			</div>
-		<h2 id = "loggedInfo">Zalogowany/na jako: Jan Kowalski</h2>
+		<h2>Zalogowany/na jako: </h2><h2 id = "loggedInfo">Jan Kowalski</h2>
 		<button id = "logOutBtn" class = "headerBtn">Wyloguj się</button>
 		<label for="darkModeCheckBox">
 			<p class = "darkModeP"></p>
 		</label>
 		<input type="checkbox" hidden class="darkMode" id="darkModeCheckBox">
+		<label for="langCheckbox" id = "langLabel" class = "lang">
+		English
+		</label>
+		<input type="checkbox" hidden class="lang" id="langCheckbox">
 </header>
 
 <div class = "flexBoxCol" id = "mainCont">
@@ -42,6 +46,7 @@
 	</div>
 </div>
 
+<script type="text/javascript" src="script.js"></script>
 <script type="text/javascript" src="logged in.js"></script>
 
 </body>
