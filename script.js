@@ -62,3 +62,22 @@ async function getData(inputStr)
   
   return obj2;
 }
+
+function hashAdler32(str)
+{
+  let A = 1;
+  let B = 0;
+
+  for (let i=0; i<str.length; i++)
+  {
+      A += str.charCodeAt(i);
+      B += A;
+  }
+
+  A = A % 65521;
+  B = B % 65521;
+
+  let C = B * 65536 + A
+  let hash = C.toString(16)
+  return hash;
+}

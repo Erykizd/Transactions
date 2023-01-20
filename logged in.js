@@ -23,6 +23,7 @@ function afterLoadedData()
 	drawPie(pieData);
 	let barsData = generateBarsData(data);
 	drawBars(barsData);
+	addFilters();
 }
 
 
@@ -263,4 +264,77 @@ function fillTransTable(dataIn)
 		cell.className = "closeRow";
 		cell.hidden = true;
 	}
+}
+
+function clearTable()
+{
+	for (let i = table.rows.length-1; i > 0; i--)
+	{
+		table.deleteRow(i);
+	}
+}
+
+function filterTableByType(searchType)
+{
+	document.getElementById("descriptionSearcher").value = "";
+	clearTable();
+	fillTransTable(data);
+	let typeInRow = table.rows[1].cells[2].firstChild.children[2].innerText;
+	
+	for (let i = table.rows.length-1; i > 0; i--)
+	{
+		typeInRow = table.rows[i].cells[2].firstChild.children[2].innerText;
+		if(typeInRow != searchType)
+		{
+			table.deleteRow(i);
+		}
+	}
+}
+
+function filterTableByDescription()
+{
+	let searchDescription = document.getElementById("descriptionSearcher").value;
+	table.rows[0].cells[1].children[1].selectedIndex=0;
+	clearTable();
+	fillTransTable(data);
+	let descriptionInRow = table.rows[1].cells[2].firstChild.children[0].innerText;
+	
+	for (let i = table.rows.length-1; i > 0; i--)
+	{
+		descriptionInRow = table.rows[i].cells[2].firstChild.children[0].innerText;
+		if(!descriptionInRow.toUpperCase().includes(searchDescription.toUpperCase()))
+		{
+			table.deleteRow(i);
+		}
+	}
+}
+
+function addFilters()
+{
+	//adding options for type selector
+	let selector = table.rows[0].cells[1].children[1];
+	selector.addEventListener("change", ()=>
+	{
+		if(selector.value != "*")
+		filterTableByType(selector.value);
+		else
+		{
+			clearTable();
+			fillTransTable(data);
+		}
+	});
+	
+	let opt = document.createElement('option');
+	opt.innerText = "*";
+	selector.appendChild(opt);
+	
+	for (let i = 1; i <= 4; i++)
+	{
+		let opt = document.createElement('option');
+		opt.innerText = data.transacationTypes[i];
+		selector.appendChild(opt);
+	}
+	
+	//connecting description searching field with function
+	document.getElementById("descriptionSearcher").addEventListener("keyup", ()=>{filterTableByDescription()});
 }

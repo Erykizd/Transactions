@@ -148,11 +148,12 @@ function validateConfPassword()
 	
 	if(psw.value != confPsw.value) 
 	{
-		confPsw.setCustomValidity(txt1);
+		confPsw.setCustomValidity(txt1); //Passwords are different
 	} 
 	else 
 	{
-		confPsw.setCustomValidity('');
+		confPsw.setCustomValidity('');  //ok
+		
 	}
 }
 
@@ -169,11 +170,11 @@ function validateEmail()
 	
 	if(email.value != confEmail.value) 
 	{
-		confEmail.setCustomValidity(txt1);
+		confEmail.setCustomValidity(txt1); // Emails are different
 	} 
 	else if(isEmailAssigned(email.value))
 	{
-		confEmail.setCustomValidity(txt2);
+		confEmail.setCustomValidity(txt2); //Email used by other user
 	}
 	else 
 	{
@@ -246,11 +247,11 @@ function validateUserName()
 	
 	if(localStorage.getItem(userName.value) != null) 
 	{
-		userName.setCustomValidity(txt1);
+		userName.setCustomValidity(txt1); //A user with this name already exists
 	} 
 	else if (userName.value == "")
 	{
-		userName.setCustomValidity(txt2);
+		userName.setCustomValidity(txt2); //Please fill in this field
 	}
 	else if(userName.value.length < userName.minLength)
 	{
@@ -279,7 +280,7 @@ function saveUserToList()
 {
 	let em = email.value;
 	let usnam = userName.value;
-	let pass = psw.value;
+	let pass = hashAdler32(psw.value);
 	let userJsObj = {email: em, userName: usnam, psw: pass};
 	let userJsonObj = JSON.stringify(userJsObj);
 	

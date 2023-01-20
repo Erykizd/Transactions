@@ -37,7 +37,7 @@ label
 	cursor: pointer;
 }
 
-input[type=text], input[type=password], input[type=email] 
+input[type=text], input[type=password], input[type=email], input[type=search], select
 {
   padding: 10px;
   margin-top: 5px; 
@@ -50,7 +50,7 @@ input[type=text], input[type=password], input[type=email]
   transition: 0.5s;
 }
 
-input[type=text]:focus, input[type=password]:focus, input[type=email]:focus 
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, input[type=search]:focus, select:focus
 {
   background-color: #cccccc;
   outline: none;

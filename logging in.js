@@ -130,9 +130,9 @@ function validatePassword()
 		
 		let userJsObj = JSON.parse(userJsonObj);
 		
-		if(userJsObj.psw != psw.value)
+		if(userJsObj.psw != hashAdler32(psw.value))
 		{
-			psw.setCustomValidity(txt1);
+			psw.setCustomValidity(txt1); //paswword is not correct
 		}
 		else
 		{
