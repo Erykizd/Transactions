@@ -5,6 +5,7 @@ var logOutBtn = document.getElementById("logOutBtn");
 var emoticons = ["💰", "🛍️", "🤑", "💳"];
 var pie;
 var bars;
+langCheckbox.addEventListener("click", afterLoadedData);
 
 logOutBtn.addEventListener("click", logOut);
 
@@ -24,12 +25,13 @@ function afterLoadedData()
 	let barsData = generateBarsData(data);
 	drawBars(barsData);
 	addFilters();
+	translateAll();
 }
 
 
 function drawPie(pieData)
 {	
-	  var pie = new Chart("pie", 
+	  pie = new Chart("pie", 
 	  {
 		type: 'pie',
 		data: 
@@ -67,7 +69,12 @@ function drawPie(pieData)
 			}
 		}
 	  });
-  	  console.log(pie);
+	  
+		if (langCheckbox.checked) //if english
+		{
+			pie.options.title.text = "Percentage of the transaction";	
+		}
+	  
 }
 
 
@@ -118,7 +125,11 @@ function drawBars(barsData)
 			}
 		}
 	  });
-	  console.log(bars);
+	  
+		if (langCheckbox.checked) //if english
+		{
+			bars.options.title.text = "Account balance chart at the end of the day";	
+		}	  
 }
 
 
@@ -157,7 +168,14 @@ function generatePieData(dataIn)
 	for(let i = 0; i < y.length; i++)
 	{
 		y[i] = Math.round(10000*y[i]/sum)/100;
-		labels[i] = dataIn.transacationTypes[i+1] +" [%]";
+		if(document.getElementById("typeSelector").children.length > 0)
+		{
+			labels[i] = document.getElementById("typeSelector").children[i+1].value
+		}
+		else
+		{
+			labels[i] = dataIn.transacationTypes[i+1] +" [%]";
+		}
 	}
 	
 	pie.y = y;
@@ -274,11 +292,15 @@ function clearTable()
 	}
 }
 
-function filterTableByType(searchType)
+function filterTableByType()
 {
+	let selector = table.rows[0].cells[1].children[1];
+	let searchType = selector.value;
 	document.getElementById("descriptionSearcher").value = "";
 	clearTable();
 	fillTransTable(data);
+	translateAll();
+	
 	let typeInRow = table.rows[1].cells[2].firstChild.children[2].innerText;
 	
 	for (let i = table.rows.length-1; i > 0; i--)
@@ -297,6 +319,7 @@ function filterTableByDescription()
 	table.rows[0].cells[1].children[1].selectedIndex=0;
 	clearTable();
 	fillTransTable(data);
+	translateAll();
 	let descriptionInRow = table.rows[1].cells[2].firstChild.children[0].innerText;
 	
 	for (let i = table.rows.length-1; i > 0; i--)
@@ -316,7 +339,7 @@ function addFilters()
 	selector.addEventListener("change", ()=>
 	{
 		if(selector.value != "*")
-		filterTableByType(selector.value);
+		filterTableByType();
 		else
 		{
 			clearTable();
@@ -326,6 +349,8 @@ function addFilters()
 	
 	let opt = document.createElement('option');
 	opt.innerText = "*";
+	
+	document.getElementById("typeSelector").innerHTML = "";
 	selector.appendChild(opt);
 	
 	for (let i = 1; i <= 4; i++)

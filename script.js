@@ -11,6 +11,8 @@ dictProm.then((val)=>{dict = val;}, (error)=>{alert(error)});
 
 function translateAll()
 {
+	if (dict != undefined)
+	{
 		let elems = document.getElementsByTagName("*");
 		let flds = "";
 		let sw = false;
@@ -52,6 +54,7 @@ function translateAll()
 				}
 			}
 		}
+	}
 }
 
 async function getData(inputStr) 
